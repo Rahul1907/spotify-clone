@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     const hash = getTokenFromUrl();
     const _token = hash.access_token;
-    console.log(_token);
     if (_token) {
       setToken(_token);
 
@@ -32,6 +31,14 @@ function App() {
           user: user,
         });
       });
+
+      spotify.getUserPlaylists().then((playlists)=>{
+        console.log(playlists);
+        dispatch({
+          type:'SET_PLAYLIST',
+          playlists:playlists
+        })
+      })
     }
   }, []);
 
